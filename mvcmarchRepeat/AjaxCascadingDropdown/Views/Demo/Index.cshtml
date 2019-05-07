@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div>
+        @Html.DropDownList("category")<br /><br />
+        <select id="s1">
+            <option>-Select Product-</option>
+        </select>
+    </div>
+
+
+
+ <script>
+    $(function(){
+
+        $("#category").change(f1);
+    });
+
+     function f1() {
+
+         $.ajax({
+             url: "Demo/getproducts",
+             type: "post",
+             data: { "cid": $("#category").val() },
+             success: function (result) {
+                 $("#s1").empty();
+                 $.each(result, function (index, item) {
+                     $("#s1").append(new Option(item.proddesc , item.prodid ));
+                 });
+             }
+
+         });
+
+
+     }
+
+ </script>
+
+
+</body>
+
+
+
+</html>
